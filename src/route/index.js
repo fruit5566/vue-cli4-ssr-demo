@@ -9,7 +9,7 @@ export default function createRouter() {
     routes: [
       {
         path: "/",
-        alias: ["/index", "/index.html"],
+        alias: ["/index"],
         meta: {
           title: "index page title",
           keyword: "index page keyword",

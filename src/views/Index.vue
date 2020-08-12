@@ -8,10 +8,10 @@
     </div>
   </div>
 </template>
-
+  
 <script>
 import indexStoreModule from "../store/module/index";
-export default {
+export default {        
   asyncData({ store }) {
     store.registerModule("index", indexStoreModule);
     return store.dispatch("index/fetchTodos");

@@ -9,7 +9,7 @@
     "build:server": "vue-cli-service build --mode server",
     "build": "npm run build:server && move dist\\vue-ssr-server-bundle.json bundle && npm run build:client && move bundle dist\\vue-ssr-server-bundle.json",
     "dev": "concurrently \"npm run serve\" \"npm run dev:serve\" ",
-    "dev:serve": "nodemon ./server/server.js"
+    "dev:serve": "nodemon ./server/index.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",

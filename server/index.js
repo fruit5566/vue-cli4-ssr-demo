@@ -35,7 +35,7 @@ app.use(async (ctx, next) => {
     if (error.code && error.code == 404) {
       ctx.redirect("/404.html");
     } else {
-      // 若SSR渲染页面出错， 退回到客户端渲染 首页
+      // 若SSR渲染出错， 退回到客户端渲染 首页
       ctx.redirect("/index.html");
     }
   }
