@@ -4,6 +4,9 @@ const nodeExternals = require("webpack-node-externals");
 const TARGET_NODE = process.env.VUE_APP_MODE == "server";
 const target = TARGET_NODE ? "server" : "client";
 
+console.log(TARGET_NODE);
+console.log(process.env.NODE_ENV);
+
 module.exports = {
   publicPath: "/",
   outputDir: "dist",

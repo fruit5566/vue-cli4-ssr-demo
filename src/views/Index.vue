@@ -8,10 +8,10 @@
     </div>
   </div>
 </template>
-  
+
 <script>
 import indexStoreModule from "../store/module/index";
-export default {        
+export default {
   asyncData({ store }) {
     store.registerModule("index", indexStoreModule);
     return store.dispatch("index/fetchTodos");
@@ -31,17 +31,6 @@ export default {
       this.$store.dispatch("index/addTodo", "看电影");
     }
   },
-  mounted() {
-    // 不生效 ???
-    this.$nextTick(() => {
-      console.log(this);
-      this.$store.dispatch("index/addTodo", "看电影");
-    });
-
-    setTimeout(() => {
-      this.$store.dispatch("index/addTodo", "看电影12");
-    });
-  },
   destroyed() {
     this.$store.unregisterModule("index");
   }
@@ -51,5 +40,6 @@ export default {
 <style lang="scss" scoped>
 .mess {
   color: green;
+  cursor: pointer;
 }
 </style>
