@@ -5,8 +5,6 @@
 - Head 管理 ( title, keyword, description )； 前后端 404
 - 若后端渲染失败，返回得到前端渲染
 
----
-
 ## 主要命令
 
 ```
@@ -18,8 +16,6 @@ $ npm run dev    # 本地开发，需先build
   └──http://localhost:3000  本地 SSR渲染
 $ npm run lint # Lint and fix files
 ```
-
----
 
 ## 源码结构
 
@@ -57,8 +53,6 @@ $ npm run lint # Lint and fix files
 └── vue.config.js # webpack配置文件
 ```
 
----
-
 ## vue.config.js 关键解析
 
 1 关闭 css 分离
@@ -75,8 +69,6 @@ chainWebpack: (config) => {
 },
 ```
 
----
-
 ## Head 管理
 
 SSR 官方文档 Head 管理有点复杂，参考了 vue-meta 的源码实现了 Head 自管理
@@ -90,6 +82,8 @@ meta: {
   description: "Index page description"
 },I
 ```
+
+---
 
 ### 前端渲染和后端渲染
 
