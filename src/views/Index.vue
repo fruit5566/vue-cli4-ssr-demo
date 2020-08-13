@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="mess" @click="clickAction">{{ message }}</div>
+  <div class="mess">
+    <div @click="clickAction">{{ message }}</div>
     <div>
       <ul>
         <li v-for="(item, index) of todos" :key="index">{{ item }}</li>
@@ -18,12 +18,19 @@ export default {
   },
   data() {
     return {
-      message: "index page title"
+      message: "Add A ToDo ... "
     };
   },
   computed: {
     todos() {
       return this.$store.state.index.todos;
+    }
+  },
+  mounted() {
+    if (window.__INITIAL_STATE__) {
+      this.$store.registerModule("index", indexStoreModule, {
+        preserveState: true
+      });
     }
   },
   methods: {
@@ -36,10 +43,18 @@ export default {
   }
 };
 </script>
-
 <style lang="scss" scoped>
 .mess {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 16px;
   color: green;
   cursor: pointer;
+  ul {
+    padding: 0;
+    li {
+      margin: 10px;
+    }
+  }
 }
 </style>

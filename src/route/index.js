@@ -6,6 +6,7 @@ Vue.use(Router);
 export default function createRouter() {
   return new Router({
     mode: "history",
+    //   base: process.env.BASE_URL
     routes: [
       {
         path: "/",
@@ -20,6 +21,10 @@ export default function createRouter() {
       {
         path: "/about",
         component: () => import("../views/About.vue")
+      },
+      {
+        path: "/home",
+        component: () => import("../views/Home.vue")
       }
     ]
   });

@@ -53,21 +53,11 @@ $ npm run lint # Lint and fix files
 └── vue.config.js # webpack配置文件
 ```
 
-## vue.config.js 关键解析
+## vue.config.js
 
-1 关闭 css 分离
-
-```
-extract: false,
-```
-
-2 关闭 splitChunks
-
-```
-chainWebpack: (config) => {
-  config.optimization.splitChunks(undefined);
-},
-```
+- 关闭 css 分离 -- extract: false,
+- 关闭 splitChunks -- splitChunks: false
+- 关闭 optimizeSSR -- optimizeSSR: false
 
 ## Head 管理
 
@@ -87,6 +77,6 @@ meta: {
 
 ### 前端渲染和后端渲染
 
-> 前后端页面渲染效果表现一致，可以用前端渲染模式 (npm run serve) 进行开发调试。 客户端预取数据采用了 Vue.mixin() 方式。
+> 客户端预取数据采用了 Vue.mixin() 方式。
 
-> 本项目用 vue-cli4 创建项目模板 vue create vue-cli4-ssr-demo。
+> Store-splitting 需要在客户端重新注册 store module，否则客户端渲染 action 无法激活。{ preserveState: true }

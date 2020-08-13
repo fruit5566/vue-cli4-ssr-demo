@@ -1,43 +1,42 @@
 const VueSSRServerPlugin = require("vue-server-renderer/server-plugin");
 const VueSSRClientPlugin = require("vue-server-renderer/client-plugin");
+const merge = require("lodash.merge");
 const nodeExternals = require("webpack-node-externals");
-const TARGET_NODE = process.env.VUE_APP_MODE == "server";
+const TARGET_NODE = process.env.VUE_APP_MODE === "server";
 const target = TARGET_NODE ? "server" : "client";
-
-console.log(TARGET_NODE);
-console.log(process.env.NODE_ENV);
 
 module.exports = {
   publicPath: "/",
   outputDir: "dist",
   filenameHashing: true,
-  pages: {
-    index: {
-      entry: `./src/entry-${target}.js`,
-
-      // 以下四项只有 client 打包 才会生效
-      template: "./public/client.template.html",
-      filename: "index.html", // 防止命中静态资源， 可修改为 somename.html
-      title: "首页",
-      chunks: ["chunk-vendors", "chunk-common", "index"]
-    }
-  },
+  indexPath: "indexc.html",
   css: {
     extract: false
   },
   configureWebpack: () => ({
+    entry: `./src/entry-${target}.js`,
     target: TARGET_NODE ? "node" : "web",
     devtool: "source-map",
     output: {
       libraryTarget: TARGET_NODE ? "commonjs2" : undefined
     },
     externals: TARGET_NODE ? nodeExternals({ allowlist: /\.css$/ }) : undefined,
+    optimization: {
+      splitChunks: false
+    },
     plugins: [TARGET_NODE ? new VueSSRServerPlugin() : new VueSSRClientPlugin()]
   }),
   chainWebpack: config => {
+    config.module
+      .rule("vue")
+      .use("vue-loader")
+      .tap(options => {
+        return merge(options, {
+          optimizeSSR: false
+        });
+      });
     if (TARGET_NODE) {
       config.plugins.delete("hmr"); // fix ssr hot update bug
-      config.optimization.splitChunks(undefined);
     }
   }
 };
